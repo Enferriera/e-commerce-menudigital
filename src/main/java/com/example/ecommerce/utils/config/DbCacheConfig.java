@@ -41,9 +41,9 @@ public class DbCacheConfig {
     @Autowired
     public CacheManager cacheManager(RedissonClient redissonClient){
         Map<String, CacheConfig> configMap = new HashMap<>();
-        configMap.put(CACHE_NAME_PRODUCTOS, new CacheConfig(60 * 1000, 8 * 60 * 1000)); // TTL de 1 minuto y tiempo máximo de inactividad de 8 horas
-        configMap.put(CACHE_NAME_CATEGORIAS_PADRE, new CacheConfig(30 * 1000, 8 * 60 * 1000)); // TTL de 30 segundos y tiempo máximo de inactividad de 8 horas
-        configMap.put(CACHE_NAME_CATEGORIA_HIJA,new CacheConfig(60* 1000,8* 60* 1000));
+        configMap.put(CACHE_NAME_PRODUCTOS, new CacheConfig(60 * 1000,   60 * 1000)); // TTL de 1 minuto y tiempo máximo de inactividad de 8 horas
+        configMap.put(CACHE_NAME_CATEGORIAS_PADRE, new CacheConfig(60 * 1000,  60 * 1000)); // TTL de 30 segundos y tiempo máximo de inactividad de 8 horas
+        configMap.put(CACHE_NAME_CATEGORIA_HIJA,new CacheConfig(60* 1000, 60* 1000));
         return new RedissonSpringCacheManager(redissonClient,configMap);
     }
 }
