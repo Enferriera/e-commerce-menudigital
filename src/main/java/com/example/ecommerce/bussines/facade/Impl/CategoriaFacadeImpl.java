@@ -9,8 +9,10 @@ import com.example.ecommerce.bussines.services.base.BaseService;
 import com.example.ecommerce.domain.dtos.categoriaDto.CategoriaDto;
 import com.example.ecommerce.domain.dtos.categoriaDto.CategoriaShortDto;
 import com.example.ecommerce.domain.entities.Categoria;
+import com.example.ecommerce.utils.config.DbCacheConfig;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -43,11 +45,13 @@ public class CategoriaFacadeImpl extends BaseFacadeImp<Categoria, CategoriaDto, 
 
 
     @Override
+    @Cacheable(value = DbCacheConfig.CACHE_NAME_CATEGORIA_HIJA)
     public List<CategoriaDto> findAllSubCategoriasByCategoriaPadreId(Long id) {
         return baseMapper.toDTOsList(categoriaService.findAllSubCategoriasByCategoriaPadreId(id));
     }
 
     @Override
+    @Cacheable(value = DbCacheConfig.CACHE_NAME_CATEGORIAS_PADRE)
     public  List<CategoriaShortDto> findAllCategoriasBySucursalId(Long idSucursal){
         return categoriaMapper.toShortDTOs(categoriaService.findAllCategoriasBySucursalId(idSucursal));
     }

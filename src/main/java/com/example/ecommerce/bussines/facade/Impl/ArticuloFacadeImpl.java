@@ -40,12 +40,11 @@ public class ArticuloFacadeImpl extends BaseFacadeImp<Articulo, ArticuloDto,Long
 
 
     @Override
-    @Cacheable(value = DbCacheConfig.CACHE_NAME)
     public List<ArticuloDto> findAllBySucursalId(Long idSucusal){
         return articuloMapper.toDTOsList(articuloService.findAllBySucursalId(idSucusal));
     }
 
-    @PostConstruct
+  /*  @PostConstruct
     public void subscribeToProductUpdatedChannel() {
         RTopic topic = redissonClient.getTopic("product-updated");
         topic.addListener(Long.class, (channel, productId) -> {
@@ -53,11 +52,12 @@ public class ArticuloFacadeImpl extends BaseFacadeImp<Articulo, ArticuloDto,Long
             System.out.println("Se actualizo la cache");
             findAllBySucursalId(productId);
         });
-    }
+    }*/
 
 
 
     @Override
+    @Cacheable(value = DbCacheConfig.CACHE_NAME_PRODUCTOS)
     public Page<ArticuloDto> findAllBySucursalIdPaged(Long idSucursal, Pageable pageable){
         return articuloMapper.toDTOsPage(articuloService.findAllBySucursalIdPaged(idSucursal, pageable));
     }
