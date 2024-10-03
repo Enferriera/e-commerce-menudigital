@@ -1,0 +1,29 @@
+# Usar una imagen base oficial de Alpine con OpenJDK
+FROM openjdk:17-alpine
+
+# Actualizar y agregar bash
+RUN apk update && apk add bash
+
+# Establecer el directorio de trabajo
+WORKDIR /app
+
+# Copiar solo los archivos necesarios para descargar dependencias (mejora la caché de Docker)
+COPY gradlew /app/gradlew
+COPY gradle /app/gradle
+COPY build.gradle /app/build.gradle
+COPY settings.gradle /app/settings.gradle
+
+# Dar permisos de ejecución al script gradlew
+RUN chmod +x /app/gradlew
+
+# Descargar dependencias sin ejecutar los tests
+RUN ./gradlew build -x test --no-daemon
+
+# Copiar el resto del código fuente
+COPY . /app
+
+# Exponer el puerto de la aplicación (puedes cambiarlo si es necesario)
+EXPOSE 8095
+
+# Comando para ejecutar la aplicación en modo desarrollo
+CMD ["./gradlew", "bootRun", "--no-daemon", "-x", "test"]

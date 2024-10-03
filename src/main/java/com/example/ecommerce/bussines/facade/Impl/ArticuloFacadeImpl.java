@@ -17,9 +17,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ArticuloFacadeImpl extends BaseFacadeImp<Articulo, ArticuloDto,Long> implements ArticuloFacade {
@@ -77,5 +79,9 @@ public class ArticuloFacadeImpl extends BaseFacadeImp<Articulo, ArticuloDto,Long
         return articuloMapper.toDTOsList(articuloService.findAllHabilitadoBySucursalId(sucursalId));
     }
 
+    @Override
+    public ResponseEntity<List<Map<String, Object>>> getAllImagesByArticuloId(Long id) {
+        return articuloService.getAllImagesByArticuloId(id);
+    }
 
 }

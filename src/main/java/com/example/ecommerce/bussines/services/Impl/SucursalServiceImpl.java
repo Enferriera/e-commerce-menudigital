@@ -1,6 +1,5 @@
 package com.example.ecommerce.bussines.services.Impl;
 
-import com.example.ecommerce.bussines.services.ImageService;
 import com.example.ecommerce.bussines.services.SucursalService;
 import com.example.ecommerce.bussines.services.base.BaseServiceImp;
 import com.example.ecommerce.domain.entities.Categoria;
@@ -9,13 +8,10 @@ import com.example.ecommerce.repositories.CategoriaRepository;
 import com.example.ecommerce.repositories.DomicilioRepository;
 import com.example.ecommerce.repositories.EmpresaRepository;
 import com.example.ecommerce.repositories.SucursalRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Set;
 
@@ -27,13 +23,12 @@ public class SucursalServiceImpl extends BaseServiceImp<Sucursal, Long> implemen
     private DomicilioRepository domicilioRepository;
     @Autowired
     private EmpresaRepository empresaRepository;
-    @Autowired
-    private ImageService imageService;
+
     @Autowired
     private CategoriaRepository categoriaRepository;
 
-    @Value("${image.folder.path}")
-    private String uploadDir;
+
+
 
 
     @Override

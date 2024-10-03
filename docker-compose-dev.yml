@@ -4,8 +4,8 @@ services:
   app:
     build:
       context: .
-      dockerfile: Dockerfile
-    container_name: spring_app_menu_digital
+      dockerfile: Dockerfile.dev
+    container_name: spring_app_menu_digital_dev
     ports:
       - "8095:8095"
     environment:
@@ -20,3 +20,6 @@ services:
 networks:
   menudigital_app_network:
     external: true
+
+
+
